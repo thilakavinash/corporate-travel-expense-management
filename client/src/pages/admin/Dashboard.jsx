@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { Users, Plane, DollarSign, Wallet, Briefcase, Shield, BarChart3, FileText, Search, UserCheck, UserCog, Users as UsersIcon, CheckCircle } from 'lucide-react';
+import { Users, Plane, DollarSign, Wallet, Briefcase, Shield, BarChart3, FileText, Search, UserCheck, UserCog, Users as UsersIcon, CheckCircle, TrendingUp } from 'lucide-react';
 import travelService from '../../services/travelService';
 import expenseService from '../../services/expenseService';
 import reimbursementService from '../../services/reimbursementService';
