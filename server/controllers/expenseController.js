@@ -59,7 +59,7 @@ const createExpense = async (req, res) => {
       description,
       amount: parseFloat(amount),
       date: new Date(date),
-      receiptUrl: req.file ? `/uploads/${req.file.filename}` : '',
+      receiptUrl: req.file ? (req.file.path || req.file.secure_url) : '',
       status: 'pending',
     });
 
