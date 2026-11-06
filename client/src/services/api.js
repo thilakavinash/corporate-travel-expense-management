@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { logRequest, logResponse, logError } from '../utils/apiDiagnostics';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/api' : 'http://localhost:5001/api');
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -41,9 +41,12 @@ api.interceptors.response.use(
   (error) => {
     logError(error, error.config);
     if (error.response?.status === 401) {
-      // Handle unauthorized access
+      // Handle unauthorized access (don't redirect on login attempt itself)
       localStorage.removeItem('token');
-      window.location.href = '/login';
+      const isLoginRequest = error.config?.url?.includes('/auth/login');
+      if (!isLoginRequest && window.location.pathname !== '/login') {
+        window.location.href = '/login';
+      }
     }
     return Promise.reject(error);
   }

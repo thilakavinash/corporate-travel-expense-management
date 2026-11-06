@@ -16,3 +16,7 @@ Thumbs.db
 # Uploads
 uploads/*
 !uploads/.gitkeep
+
+# Local MongoDB data
+data/
+

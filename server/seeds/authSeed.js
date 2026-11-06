@@ -78,11 +78,21 @@ const seedUsers = async () => {
     console.log('Admin: alice.admin@company.com / password123');
     console.log('Employee: john.employee@company.com / password123');
 
-    process.exit(0);
+    if (require.main === module) {
+      process.exit(0);
+    }
+    return true;
   } catch (error) {
     console.error('❌ Seeding error:', error.message);
-    process.exit(1);
+    if (require.main === module) {
+      process.exit(1);
+    }
+    throw error;
   }
 };
 
-seedUsers();
+if (require.main === module) {
+  seedUsers();
+}
+
+module.exports = seedUsers;
